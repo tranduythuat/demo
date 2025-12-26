@@ -71,6 +71,7 @@ canvas {
     inset: 0;
     pointer-events: none;
     z-index: 999;
+    perspective: 800px;
 }
 
 .leaf {
@@ -80,4 +81,5 @@ canvas {
     background-size: contain;
     background-repeat: no-repeat;
     will-change: transform;
+    transform-style: preserve-3d;
 }
