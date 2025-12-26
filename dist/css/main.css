@@ -1,0 +1,804 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "SVN-Gotham";
+  src: url("../../assets/fonts/SVN-GothamBook.woff2") format("woff2"), url("../fonts/SVN-GothamBook.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SVN-GothamLight";
+  src: url("../../assets/fonts/SVN-Gotham Light.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SVN-GothamBold";
+  src: url("../../assets/fonts/SVN-Gotham Bold.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SELVIA";
+  src: url("../../assets/fonts/1FTV-VIP-SELVIA-GENATU-MEDIUM.OTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "1FTVBlushingRose";
+  src: url("../../assets/fonts/1FTVBlushingRose.woff2") format("woff2"), url("../fonts/1FTVBlushingRose.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 12.65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  max-width: 500px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background-color: #fcf5eb;
+}
+
+/* music */
+.music-block {
+  display: flex;
+  position: fixed;
+  bottom: 10px;
+  right: 1%;
+  z-index: 9999;
+}
+.music-block .player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 55px;
+  width: 100%;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  z-index: 9999;
+}
+.music-block .player img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.music-block .music-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  color: white;
+}
+.music-block .music-label label {
+  font-family: "1FTVBlushingRose", sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%;
+  padding: 9% 0 8% 10%;
+  background-color: #a23622;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  transform: translateX(28%);
+  border: 1px solid white;
+}
+
+.spin {
+  animation: spin 4s linear infinite;
+}
+
+/* Định nghĩa hoạt ảnh xoay */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 500px) {
+  body {
+    font-size: 2.53vw;
+  }
+  .music-block .player {
+    max-width: 11vw;
+  }
+  .music-block .music-label {
+    width: 28vw;
+  }
+  .music-block .music-label label {
+    font-size: 2.4vw;
+  }
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #a23622;
+  color: white;
+  padding: 1rem;
+}
+
+.image-wrapper {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 0;
+}
+.image-wrapper img {
+  width: 320px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.animate-flip {
+  transform-origin: left center;
+  transform: rotateY(-120deg) scale(0.9);
+  opacity: 0;
+  filter: brightness(0.6);
+  backface-visibility: hidden;
+  transition: none;
+}
+
+.animate-flip.active {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+.fade-blur {
+  opacity: 0;
+  filter: blur(12px);
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  top: 100px;
+  border-radius: 12px;
+}
+
+.red {
+  background: #e74c3c;
+}
+
+.blue {
+  background: #3498db;
+}
+
+.green {
+  background: #2ecc71;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.leaf {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.hero {
+  justify-content: flex-start;
+  width: 100%;
+  aspect-ratio: 500/753;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 196, 145, 0.259)), url("../../assets/images/hero-bg.jpg") no-repeat center/cover;
+}
+.hero .content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  color: white;
+  font-family: "1FTVBlushingRose", sans-serif;
+}
+.hero .content img {
+  width: 58%;
+  height: auto;
+}
+
+.invitation .content {
+  font-family: "SVN-GothamLight", sans-serif;
+  width: 100%;
+  font-weight: 300;
+}
+.invitation .content .text-box {
+  padding: 20% 10% 20%;
+  text-align: left;
+  line-height: 1.3;
+  background: url("../../assets/images/flowers-bg-1.png") no-repeat 80% 20%/80%;
+}
+.invitation .content .text-box .initials img {
+  width: 94px;
+  height: auto;
+}
+.invitation .content .text-box .family-info {
+  margin-top: 5%;
+}
+.invitation .content .text-box .family-info p {
+  font-size: 11px;
+}
+.invitation .content .text-box .family-info p.en {
+  margin-top: 4%;
+}
+.invitation .content .text-box .invitation-text {
+  margin-top: 8%;
+}
+.invitation .content .text-box .invitation-text p {
+  font-size: 11px;
+}
+.invitation .content .text-box .invitation-text p span {
+  font-family: "SVN-GothamBold", sans-serif;
+  font-weight: bold;
+}
+.invitation .content .text-box .invitation-text p.en {
+  margin-top: 4%;
+  margin-bottom: 15%;
+}
+.invitation .content .text-box .couple-info {
+  text-transform: uppercase;
+  margin-top: 20%;
+}
+.invitation .content .text-box .couple-info h2 {
+  font-family: "SELVIA", sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: #a23622;
+}
+.invitation .content .text-box .couple-info p.role {
+  font-size: 11px;
+}
+.invitation .content .text-box .couple-info p.divider {
+  margin-bottom: 10%;
+}
+.invitation .content .image-box {
+  width: 100%;
+  aspect-ratio: 500/812;
+  background: linear-gradient(to bottom, #e8e6d9, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("https://yenstudio.info.vn/tien-anh/DSCF7803.webp") no-repeat 48% 100%/cover;
+}
+.invitation .content .image-box h2 {
+  font-family: "1FTVBlushingRose", sans-serif;
+  font-size: 56px;
+  font-weight: 100;
+  margin-top: 5%;
+}
+@media (max-width: 500px) {
+  .invitation .content .text-box .initials img {
+    width: 18.8vw;
+  }
+  .invitation .content .text-box .family-info p {
+    font-size: 2.2vw;
+  }
+  .invitation .content .text-box .invitation-text p {
+    font-size: 2.2vw;
+  }
+  .invitation .content .text-box .couple-info h2 {
+    font-size: 6vw;
+    letter-spacing: 0.4vw;
+  }
+  .invitation .content .text-box .couple-info p.role {
+    font-size: 2.2vw;
+  }
+  .invitation .content .image-box h2 {
+    font-size: 11.2vw;
+  }
+}
+
+.location {
+  width: 100%;
+  aspect-ratio: 500/782;
+  background: url("../../assets/images/red-bg.png") no-repeat center/cover;
+}
+.location .content {
+  width: 100%;
+  color: white;
+  text-align: left;
+  padding: 15% 9% 0;
+}
+.location .content h2 {
+  font-family: "SVN-Gotham", sans-serif;
+  font-size: 9.1px;
+  text-transform: uppercase;
+  font-weight: 100;
+  margin-bottom: 4%;
+}
+.location .content .time-block p.time {
+  font-family: "SELVIA", sans-serif;
+  font-size: 30px;
+}
+.location .content .time-block p.label {
+  font-family: "SVN-GothamLight", sans-serif;
+  font-size: 12.6px;
+  font-style: italic;
+}
+.location .content .divider {
+  width: 16px;
+  margin: 6% 0;
+}
+.location .content .divider img {
+  width: 100%;
+  height: auto;
+}
+.location .content .location-block p.location-name {
+  font-family: "SELVIA", sans-serif;
+  font-size: 25px;
+}
+.location .content .location-block p.address {
+  font-family: "SVN-GothamLight", sans-serif;
+  font-size: 12.6px;
+  font-style: italic;
+}
+.location .content .location-block .maps-btn {
+  display: block;
+  font-family: "SVN-GothamBold", sans-serif;
+  font-size: 9.3px;
+  width: 40%;
+  padding: 1% 0 1.5%;
+  background: white;
+  color: #a23622;
+  border: 1px solid #a23622;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s ease;
+  margin-top: 3%;
+  text-decoration: none;
+  text-align: center;
+}
+.location .content .location-block .maps-btn:hover {
+  background: #a23622;
+  border: 1px solid white;
+  color: white;
+}
+@media (max-width: 500px) {
+  .location .content h2 {
+    font-size: 1.82vw;
+  }
+  .location .content .time-block p.time {
+    font-size: 6vw;
+  }
+  .location .content .time-block p.label {
+    font-size: 2.52vw;
+  }
+  .location .content .divider {
+    width: 3.2vw;
+  }
+  .location .content .location-block p.location-name {
+    font-size: 5vw;
+  }
+  .location .content .location-block p.address {
+    font-size: 2.52vw;
+  }
+  .location .content .location-block .maps-btn {
+    font-size: 1.86vw;
+    letter-spacing: 0.2vw;
+  }
+}
+
+.timeline {
+  width: 100%;
+  background: url("../../assets/images/flowers-bg-2.png") no-repeat 50% 100%/90%;
+}
+.timeline .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 10%;
+}
+.timeline .content .hero-box {
+  max-width: 260px;
+  width: 100%;
+  aspect-ratio: 260/416;
+  position: relative;
+}
+.timeline .content .hero-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -28%;
+}
+.timeline .content .hero-box p.date {
+  font-family: "SVN-Gotham", sans-serif;
+  font-size: 19px;
+  color: #a23622;
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.timeline .content .timeline-box {
+  margin-top: -10%;
+}
+.timeline .content .timeline-box h2 {
+  font-family: "SVN-GothamBold", sans-serif;
+  font-size: 19px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #a23622;
+  margin-bottom: 60%;
+}
+.timeline .content .timeline-box .timeline-items .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 25%;
+}
+.timeline .content .timeline-box .timeline-items .item .icon {
+  width: 35px;
+}
+.timeline .content .timeline-box .timeline-items .item .icon img {
+  width: 100%;
+  height: auto;
+}
+.timeline .content .timeline-box .timeline-items .item .desc p {
+  font-family: "SVN-Gotham", sans-serif;
+  font-size: 11.42px;
+}
+.timeline .content .timeline-box .timeline-items .item .desc p span {
+  font-family: "SVN-GothamBold", sans-serif;
+}
+@media (max-width: 500px) {
+  .timeline .content .hero-box {
+    max-width: 52vw;
+  }
+  .timeline .content .hero-box p.date {
+    font-size: 3.8vw;
+  }
+  .timeline .content .timeline-box h2 {
+    font-size: 3.8vw;
+    letter-spacing: 0.3vw;
+  }
+  .timeline .content .timeline-box .timeline-items .item .icon {
+    width: 7vw;
+  }
+  .timeline .content .timeline-box .timeline-items .item .desc p {
+    font-size: 2.284vw;
+  }
+}
+
+.our-story {
+  width: 100%;
+}
+.our-story .content {
+  width: 100%;
+  font-family: "SVN-Gotham", sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.8px;
+}
+.our-story .content .top-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.our-story .content .top-box img {
+  width: 100%;
+  height: auto;
+}
+.our-story .content .top-box .text-overlay {
+  color: white;
+  position: absolute;
+}
+.our-story .content .top-box .text-overlay p {
+  margin: 5% 0;
+}
+.our-story .content .top-box .text-overlay img {
+  width: 20px;
+  height: auto;
+}
+.our-story .content .top-box .text-overlay img:last-child {
+  transform: rotate(180deg);
+}
+.our-story .content .middle-box {
+  padding: 14% 8% 20%;
+  background: url("../../assets/images/flowers-bg-3.png") no-repeat 50% 40%/80%;
+}
+.our-story .content .middle-box p.full-width {
+  text-align: justify;
+  text-align-last: center;
+  margin-bottom: 10%;
+}
+.our-story .content .middle-box .row {
+  display: flex;
+}
+.our-story .content .middle-box .row .img-box {
+  position: relative;
+}
+.our-story .content .middle-box .row .img-box img.main-img {
+  width: 170px;
+  height: auto;
+}
+.our-story .content .middle-box .row .img-box img.love-story-img {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  bottom: -10%;
+  right: -60%;
+}
+.our-story .content .middle-box .row .text-box {
+  text-align: justify;
+  padding-top: 5%;
+  padding-left: 8%;
+}
+.our-story .content .middle-box .row p {
+  margin-bottom: 5%;
+}
+.our-story .content .bottom-box img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 500px) {
+  .our-story .content {
+    font-size: 1.6vw;
+    letter-spacing: 0.16vw;
+  }
+  .our-story .content .top-box .text-overlay img {
+    width: 4vw;
+  }
+  .our-story .content .middle-box .row .img-box img.main-img {
+    width: 34vw;
+  }
+  .our-story .content .middle-box .row .img-box img.love-story-img {
+    width: 30vw;
+  }
+}
+
+.album {
+  width: 100%;
+}
+.album .content {
+  width: 100%;
+}
+.album .content .swiper {
+  width: 100%;
+  aspect-ratio: 500/752;
+  margin: 10px auto;
+}
+.album .content .swiper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.album .content .swiper .swiper-button-next,
+.album .content .swiper .swiper-button-prev {
+  color: white;
+}
+.album .content .swiper .swiper-pagination-bullet-active {
+  background: white;
+}
+@media (max-width: 500px) {
+  .album .content .swiper .swiper-button-next:after,
+  .album .content .swiper .swiper-button-prev:after {
+    font-size: 8.8vw;
+  }
+}
+
+.rsvp {
+  width: 100%;
+  aspect-ratio: 500/1290;
+  background: url("../../assets/images/flowers-bg-4.png") no-repeat 50% 28%/80%, url("../../assets/images/end-bg.png") no-repeat bottom/contain;
+  justify-content: flex-start;
+}
+.rsvp .content {
+  width: 100%;
+  font-family: "1FTVBlushingRose", sans-serif;
+  font-weight: 100;
+  line-height: 1.2;
+  padding: 10% 10%;
+  text-align: left;
+  perspective: 1000px;
+}
+.rsvp .content .top-img {
+  width: 100%;
+  aspect-ratio: 386/216;
+  margin: 0 auto;
+}
+.rsvp .content .top-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 70%;
+}
+.rsvp .content .header {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: start;
+  margin: 10% 0;
+  color: #a23622;
+  font-family: "SELVIA", sans-serif;
+  font-size: 22px;
+}
+.rsvp .content .header h1 {
+  font-weight: 300;
+}
+.rsvp .content .info-notice {
+  margin-bottom: 10%;
+}
+.rsvp .content .info-notice p {
+  text-align: left;
+  font-family: "SVN-GothamLight", sans-serif;
+}
+.rsvp .content .info-notice p.vi {
+  margin-bottom: 3%;
+}
+.rsvp .content form .form-group {
+  margin-bottom: 2%;
+}
+.rsvp .content form .form-group input[type=text],
+.rsvp .content form .form-group input[type=number],
+.rsvp .content form .form-group textarea {
+  font-family: "SVN-Gotham", sans-serif;
+  width: 100%;
+  padding: 2% 3%;
+  border: 2px solid #a23622;
+  border-radius: 15px;
+  background: transparent;
+  font-size: 9.5px;
+  color: #000;
+  transition: border-color 0.3s ease;
+}
+.rsvp .content form .form-group input[type=text]:focus,
+.rsvp .content form .form-group input[type=number]:focus,
+.rsvp .content form .form-group textarea:focus {
+  outline: none;
+}
+.rsvp .content form .form-group textarea {
+  aspect-ratio: 500/100;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 9.6px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+.rsvp .content form .form-group .attendance-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10%;
+  margin: 14% 0 15%;
+}
+.rsvp .content form .form-group .attendance-buttons .radio-wrapper {
+  position: relative;
+}
+.rsvp .content form .form-group .attendance-buttons .radio-wrapper input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.rsvp .content form .form-group .attendance-buttons .radio-label {
+  font-family: "SVN-GothamLight", sans-serif;
+  display: block;
+  padding: 2%;
+  border: 2px solid #a23622;
+  border-radius: 15px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.5;
+}
+.rsvp .content form .form-group .attendance-buttons .radio-label:hover {
+  background: #ded1c3;
+}
+.rsvp .content form .form-group .attendance-buttons .radio-wrapper input[type=radio]:checked + .radio-label {
+  background: #a23622;
+  border: 2px solid #a23622;
+  color: white;
+}
+.rsvp .content form .form-group .dietary-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.rsvp .content form .message-group {
+  margin-top: 14%;
+}
+.rsvp .content form .submit-btn {
+  width: 38%;
+  padding: 2%;
+  background: #a23622;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 300;
+  font-size: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s ease;
+  margin-bottom: 10%;
+}
+.rsvp .content form .submit-btn:hover {
+  background: rgb(90, 91, 91);
+  opacity: 0.9;
+}
+.rsvp .content form .submit-btn:active {
+  transform: scale(0.98);
+}
+@media (max-width: 500px) {
+  .rsvp .content .header {
+    font-size: 4.4vw;
+  }
+  .rsvp .content form .form-group input[type=text],
+  .rsvp .content form .form-group input[type=number],
+  .rsvp .content form .form-group textarea {
+    font-size: 1.9vw;
+  }
+  .rsvp .content form .form-group textarea {
+    font-size: 1.832vw;
+    letter-spacing: 0.1vw;
+  }
+  .rsvp .content form .submit-btn {
+    font-size: 2.4vw;
+    letter-spacing: 0.2vw;
+  }
+}
+
+.end {
+  width: 100%;
+  aspect-ratio: 500/1100;
+  background: url("https://yenstudio.info.vn/tien-anh/DSCF8755%20.webp") no-repeat 48% 100%/cover;
+  justify-content: end;
+}
+.end .content {
+  width: 100%;
+  font-family: "1FTVBlushingRose", sans-serif;
+}
+.end .content p {
+  font-size: 17.5px;
+  text-transform: uppercase;
+  margin-bottom: 5%;
+  color: white;
+}
+@media (max-width: 500px) {
+  .end .content p {
+    font-size: 3.5vw;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

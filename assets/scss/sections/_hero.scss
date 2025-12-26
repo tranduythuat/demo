@@ -1,0 +1,22 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.hero {
+    justify-content: flex-start;
+    width: 100%;
+    aspect-ratio: 500 / 753;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 196, 145, 0.259)),
+                url('../../assets/images/hero-bg.jpg') no-repeat center / cover;
+    .content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        color: white;
+        font-family: $blushing-rose-font; 
+        img {
+            width: 58%;
+            height: auto;
+        }
+    }
+}

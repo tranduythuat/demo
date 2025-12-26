@@ -1,0 +1,27 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.end {
+    width: 100%;
+    aspect-ratio: 500 / 1100;
+    background: url('https://yenstudio.info.vn/tien-anh/DSCF8755%20.webp') no-repeat 48% 100% / cover;
+    justify-content: end;
+    .content {
+        width: 100%;
+        font-family: $blushing-rose-font;
+        p {
+            font-size: 17.5px;
+            text-transform: uppercase;
+            margin-bottom: 5%;
+            color: white;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .content {
+            p {
+                font-size: calc((17.5 / 500) * 100vw);
+            }
+        }
+    }
+}

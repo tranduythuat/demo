@@ -1,0 +1,106 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.timeline {
+    width: 100%;
+    background: url('../../assets/images/flowers-bg-2.png') no-repeat 50% 100% / 90%;
+    .content {
+        @include flex-center;
+        flex-direction: column;
+        width: 100%;
+        padding-bottom: 10%;
+        .hero-box {
+            max-width: 260px;
+            width: 100%;
+            aspect-ratio: 260 / 416;
+            position: relative;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: -28%;
+            }
+
+            p.date {
+                font-family: $gotham-font;
+                font-size: 19px;
+                color: $primary-color;
+                position: absolute;
+                top: -15%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        .timeline-box {
+            margin-top: -10%;
+            h2 {
+                font-family: $gothamBold-font;
+                font-size: 19px;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: $primary-color;
+                margin-bottom: 60%
+            }
+
+            .timeline-items {
+                .item {
+                    @include flex-center;
+                    flex-direction: column;
+                    margin-bottom: 25%;
+                    .icon {
+                        width: 35px;
+                        img {
+                            width: 100%;
+                            height: auto;
+                        }
+                    }
+
+                    .desc {
+                        p {
+                            font-family: $gotham-font;
+                            font-size: 11.42px;
+                            span {
+                                font-family: $gothamBold-font;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 500px) {
+        .content {
+            .hero-box {
+                max-width: calc((260 / 500) * 100vw);
+                p.date {
+                    font-size: calc((19 / 500) * 100vw);
+                }
+            }
+
+            .timeline-box {
+                h2 {
+                    font-size: calc((19 / 500) * 100vw);
+                    letter-spacing: calc((1.5 / 500) * 100vw);
+                }
+    
+                .timeline-items {
+                    .item {
+                        .icon {
+                            width: calc((35 / 500) * 100vw);
+                        }
+    
+                        .desc {
+                            p {
+                                font-size: calc((11.42 / 500) * 100vw);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

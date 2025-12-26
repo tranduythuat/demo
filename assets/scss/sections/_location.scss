@@ -1,0 +1,114 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.location {
+    width: 100%;
+    aspect-ratio: 500 / 782;
+    background: url('../../assets/images/red-bg.png') no-repeat center / cover;
+    .content {
+        width: 100%;
+        color: white;
+        text-align: left;
+        padding: 15% 9% 0;
+        h2 {
+            font-family: $gotham-font;
+            font-size: 9.1px;
+            text-transform: uppercase;
+            font-weight: 100;
+            margin-bottom: 4%;
+        }
+
+        .time-block {
+            p.time {
+                font-family: $selvia-font;
+                font-size: 30px;
+            }
+            p.label {
+                font-family: $gothamLight-font;
+                font-size: 12.6px;
+                font-style: italic;
+            }
+        }
+
+        .divider {
+            width: 16px;
+            margin: 6% 0;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .location-block {
+            p.location-name {
+                font-family: $selvia-font;
+                font-size: 25px;
+            }
+            p.address {
+                font-family: $gothamLight-font;
+                font-size: 12.6px;
+                font-style: italic;
+            }
+
+            .maps-btn {
+                display: block;
+                font-family: $gothamBold-font;
+                font-size: 9.3px;
+                width: 40%;
+                padding: 1% 0 1.5%;
+                background: white;
+                color: $primary-color;
+                border: 1px solid $primary-color;
+                border-radius: 5px;
+                cursor: pointer;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                transition: background 0.3s ease;
+                margin-top: 3%;
+                text-decoration: none;
+                text-align: center;
+            }
+    
+            .maps-btn:hover {
+                background: $primary-color;
+                border: 1px solid white;
+                color: white;
+            }
+        }
+    }
+
+    @media (max-width: 500px) {
+        .content {
+            h2 {
+                font-size: calc((9.1 / 500) * 100vw);
+            }
+    
+            .time-block {
+                p.time {
+                    font-size: calc((30 / 500) * 100vw);
+                }
+                p.label {
+                    font-size: calc((12.6 / 500) * 100vw);
+                }
+            }
+
+            .divider {
+                width: calc((16 / 500) * 100vw);
+            }
+    
+            .location-block {
+                p.location-name {
+                    font-size: calc((25 / 500) * 100vw);
+                }
+                p.address {
+                    font-size: calc((12.6 / 500) * 100vw);
+                }
+    
+                .maps-btn {
+                    font-size: calc((9.3 / 500) * 100vw);
+                    letter-spacing: calc((1 / 500) * 100vw);
+                }
+            }
+        }
+    }
+}

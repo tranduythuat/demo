@@ -1,0 +1,111 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.our-story {
+    width: 100%;
+    .content {
+        width: 100%;
+        font-family: $gotham-font;
+        font-size: 8px;
+        letter-spacing: .8px;
+
+        .top-box {
+            position: relative;
+            @include flex-center;
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            .text-overlay {
+                color: white;
+                position: absolute;
+                p {
+                    margin: 5% 0;
+                }
+                img {
+                    width: 20px;
+                    height: auto;
+                }
+
+                img:last-child {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .middle-box {
+            padding: 14% 8% 20%;
+            background: url('../../assets/images/flowers-bg-3.png') no-repeat 50% 40% / 80%;
+            p.full-width {
+                text-align: justify;
+                text-align-last: center;
+                margin-bottom: 10%;
+            }
+            .row {
+                display: flex;
+                .img-box {
+                    position: relative;
+                    img.main-img {
+                        width: 170px;
+                        height: auto;
+                    }
+
+                    img.love-story-img {
+                        position: absolute;
+                        width: 150px;
+                        height: auto;
+                        bottom: -10%;
+                        right: -60%;
+                    }
+                } 
+
+                .text-box {
+                    text-align: justify;
+                    padding-top: 5%;
+                    padding-left: 8%;
+                }
+
+                p {
+                    margin-bottom: 5%;
+                }
+            }
+        }
+
+        .bottom-box {
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    @media (max-width: 500px) {
+        .content {
+            font-size: calc((8 / 500) * 100vw);
+            letter-spacing: calc((0.8 / 500) * 100vw);
+
+            .top-box {
+                .text-overlay {
+                    img {
+                        width: calc((20 / 500) * 100vw);
+                    }
+                }
+            }
+
+            .middle-box {
+                .row {
+                    .img-box {
+                        img.main-img {
+                            width: calc((170 / 500) * 100vw);
+                        }
+    
+                        img.love-story-img {
+                            width: calc((150 / 500) * 100vw);
+                        }
+                    } 
+                }
+            }
+        }
+    }
+}
