@@ -21,6 +21,15 @@ const wind = {
   phase: Math.random() * Math.PI * 2
 }
 
+let scrolling
+window.addEventListener("scroll", () => {
+  document.body.classList.add("scrolling")
+  clearTimeout(scrolling)
+  scrolling = setTimeout(() => {
+    document.body.classList.remove("scrolling")
+  }, 150)
+})
+
 function createItem() {
   const el = document.createElement("div")
   el.className = "leaf"
@@ -51,7 +60,11 @@ function createItem() {
 function animateFall(el, depth) {
   const fallDuration = gsap.utils.mapRange(0.3, 1, 24, 12, depth)
   const spinDuration = gsap.utils.mapRange(4, 5, 3)
-
+  const getSceneHeight = () =>
+    Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    )
   // nghiêng mạnh
   const driftX =
     WIND_STRENGTH * WIND_DIRECTION * (1.4 + depth) +
@@ -59,7 +72,7 @@ function animateFall(el, depth) {
 
   // ⬇️ rơi chính
   gsap.to(el, {
-    y: window.innerHeight + 200,
+    y: getSceneHeight() + 200,
     x: `+=${driftX}`,
     duration: fallDuration,
     ease: "none",

@@ -199,11 +199,17 @@ canvas {
   z-index: 10000;
 }
 
+body.scrolling .leaf {
+  filter: none !important;
+}
+
 .scene {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 999;
+  perspective: 800px;
+  backface-visibility: hidden;
 }
 
 .leaf {
@@ -213,6 +219,7 @@ canvas {
   background-size: contain;
   background-repeat: no-repeat;
   will-change: transform;
+  transform-style: preserve-3d;
 }
 
 .hero {
