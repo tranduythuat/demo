@@ -72,7 +72,7 @@ function animateFall(el, depth) {
 
   // ⬇️ rơi chính
   gsap.to(el, {
-    y: getSceneHeight() + 200,
+    y: window.innerHeight + 200,
     x: `+=${driftX}`,
     duration: fallDuration,
     ease: "none",
